@@ -158,6 +158,8 @@
       font-size:1.25rem;
       font-weight:500;
       transition:0.2s ease;
+      border:none;
+      cursor:pointer;
     }
 
     .add-contact:hover{
@@ -324,8 +326,8 @@
           </div>
 
           <div class="info-value">
-            <a href="https://agents.bankerslife.com/in/fort-wayne/9910-dupont-circle-drive-e/jonathan-roscoe" target="_blank">
-             bankerslife.com
+            <a href="https://agents.bankerslife.com" target="_blank">
+              agents.bankerslife.com
             </a>
           </div>
 
@@ -355,11 +357,51 @@
 
     </div>
 
-    <a class="add-contact" href="https://raw.githubusercontent.com/jonathandroscoe-collab/jonathanroscoe/main/jonathan_roscoe_contact.vcf" download>
+    <button class="add-contact" onclick="downloadVCF()">
       Add Contact
-    </a>
+    </button>
 
   </div>
+
+  <script>
+
+    function downloadVCF() {
+
+      const vcfData = `BEGIN:VCARD
+VERSION:3.0
+N:Roscoe;Jonathan;;;
+FN:Jonathan Roscoe
+TITLE:Financial Professional, Insurance Agent
+ORG:Bankers Life
+TEL;TYPE=CELL:260-226-3115
+TEL;TYPE=WORK:260-277-6027
+TEL;TYPE=OFFICE:260-489-1645
+EMAIL:jonathan.roscoe@bankerslife.com
+URL:https://agents.bankerslife.com
+NOTE:Helping individuals and families navigate Medicare, life insurance, extended care, and retirement planning with clarity and confidence.
+END:VCARD`;
+
+      const blob = new Blob([vcfData], { type: 'text/vcard' });
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+
+      a.href = url;
+
+      a.download = 'Jonathan_Roscoe_Contact.vcf';
+
+      document.body.appendChild(a);
+
+      a.click();
+
+      document.body.removeChild(a);
+
+      window.URL.revokeObjectURL(url);
+
+    }
+
+  </script>
 
 </body>
 </html>
